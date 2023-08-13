@@ -1,0 +1,26 @@
+.ModalOverlay {
+    align-items: center;
+    background-color: #023449ee;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 1200;
+    text-align: center;
+    font-size: 3em;
+    
+    cursor: zoom-out;
+}
+.ModalImg {
+    max-height: 100%;
+    max-width: 100%;
+    border: 1px dotted rgba(0, 0, 0, 0.911);
+    cursor: default;
+}
+.ModalImgContainer {
+    max-height: 95%;
+    max-width: 95%;
+}
