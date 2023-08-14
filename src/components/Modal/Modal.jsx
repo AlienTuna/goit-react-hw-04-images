@@ -1,48 +1,38 @@
-import { Component } from 'react'
+import { useEffect } from 'react'
 
 import css from './Modal.module.css'
 
 import PropTypes from 'prop-types';
 
-export class Modal extends Component {
-    componentDidMount() {
-        window.addEventListener('keydown', this.handleEscapeKeyDown);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.handleEscapeKeyDown);
-    }
+export function Modal({ onCloseModal, src, alt }) {
+    useEffect(() => {
+        window.addEventListener('keydown', closeModal)
 
-    handleEscapeKeyDown = (e) => {
-        if (e.code === 'Escape') {
-            this.props.onCloseModal();
+        return () => window.removeEventListener('keydown', closeModal);
+    })
+
+    function closeModal(e) {
+        // console.log('close Modal')
+        if (e.code === 'Escape' || e.target === e.currentTarget) {
+            onCloseModal();
         }
     }
 
-    handleOverlayClick = (e) => {
-        if (e.target === e.currentTarget) {
-            this.props.onCloseModal();
-        }
-    }
-
-    render() {
-        const { src, alt } = this.props;
-
-        return (
-            <div
-                title="Go back"
-                className={css.ModalOverlay}
-                onClick={this.handleOverlayClick}
-            >
-                <div className={css.ModalImgContainer}>
-                    <img
+    return (
+        <div
+            title="Go back"
+            className={css.ModalOverlay}
+            onClick={closeModal}
+        >
+            <div className={css.ModalImgContainer}>
+                <img
                     className={css.ModalImg}
-                        src={src}
-                        alt={alt}
-                        title={alt}
-                    />
-                </div>
-            </div>)
-    }
+                    src={src}
+                    alt={alt}
+                    title={alt}
+                />
+            </div>
+        </div>)
 }
 
 Modal.propTypes = {

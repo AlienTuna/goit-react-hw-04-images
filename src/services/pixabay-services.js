@@ -14,7 +14,7 @@ import api from "https";
 
 export default class PixabayServices {
     static async getImages(query, page = 1) {
-        return await api.get('', {
+        const result = await api.get('', {
             params: {
                 q: query,
                 page,
@@ -22,8 +22,10 @@ export default class PixabayServices {
                 orientation: 'horizontal'
             }
         })
+        const items = result.data.hits;
+        const totalHits = items.length > 0 ? Number(result.data.totalHits) : 0
+
+        const isLoadMoreAvailable = (totalHits / 12 / page) >= 1;
+        return { items, totalHits, isLoadMoreAvailable }
     }
-
-
-
 }
