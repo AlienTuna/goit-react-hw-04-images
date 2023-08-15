@@ -44,9 +44,9 @@ export default function ImageGallery({ searchQuery }) {
                     if (!isLoadMoreAvailable) { 
                         toast('Reached the end of list')
                     }
-                    if (!isLoadMoreAvailable === loadMoreAvailable) { 
+                    // if (!isLoadMoreAvailable === loadMoreAvailable) { 
                         setLoadMoreAvailable(isLoadMoreAvailable); 
-                    }
+                    // }
                     setStatus('resolved');
                     return;
                 }
